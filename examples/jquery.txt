@@ -1,0 +1,114 @@
+focus event fires on disabled inputs #5620
+Open
+#5623
+Open
+focus event fires on disabled inputs
+#5620
+#5623
+@bobanjongis
+Description
+bobanjongis
+opened on Jan 29, 2025
+Problem Description
+Triggering focus on an input element causes a focus event to be emitted even when the input element is disabled.
+This is a regression introduced with jQuery 3.7 - the bug is reproducible on v3.7.0 and v3.7.1.
+
+Steps to reproduce the problem
+Create a disabled input element
+Attach a focus event handler on the input using jQuery
+Trigger a focus event on the input using jQuery
+This can be observed with the following code snippet, where clicking the button triggers the focus event on the disabled input, and hence the assertion fails.
+
+<input id="theDisabledInput" disabled />
+<button onclick="focusTheDisabledInput()">Focus the disabled input</button>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+    $("#theDisabledInput").on("focus", (event) => {
+        console.assert(!event.target.disabled, "'focus' event fired on a disabled input element!");
+    });
+
+    function focusTheDisabledInput() {
+        $("#theDisabledInput").focus();
+    }
+</script>
+Note: it is important to both attach the event listener and trigger the event using jQuery, in order to be able to reproduce the issue
+
+Activity
+mgol
+mgol commented on Jan 31, 2025
+mgol
+on Jan 31, 2025
+Member
+Thanks for the report. I migrated it to a JS Bin (please try to submit a test case via a platform like that in the future, that makes it a bit easier for us): https://jsbin.com/doxemuy/1/edit?html,js,output. I migrated the inline onclick to a regular event handler as we don't fully support inline handlers.
+
+The issue is not actually new in jQuery 3.7.0. You might think so as in older jQueries the first click doesn't trigger the handler but subsequent clicks do; example with jQuery 3.4.0: https://jsbin.com/sakiwej/1/edit?html,js,output.
+
+You have to go as far back as jQuery 3.3.1 to not see this behavior at all: https://jsbin.com/zozovaw/1/edit?html,js,output
+
+This must be caused by the introduction of leverageNative in jQuery 3.4.0: #4279. This code underwent many iterations and in jQuery 3.7.x it's much cleaner - I'd even argue it's better now than in 3.4-3.6 as it at least runs the handler consistently - but this seems like an omission in the logic, indeed.
+
+
+mgol
+added 
+Bug
+ 
+Event
+ on Jan 31, 2025
+
+mgol
+self-assigned thison Jan 31, 2025
+
+mgol
+added this to the 4.1.0 milestone on Jan 31, 2025
+
+mgol
+added 
+Discuss in Meeting
+Reserved for Issues and PRs that anyone would like to discuss in the weekly meeting.
+ on Jan 31, 2025
+mgol
+mgol commented on Feb 1, 2025
+mgol
+on Feb 1, 2025
+Member
+It's worth pointing out that the same behavior for click - triggering click on disabled inputs - fires the handler even in jQuery 2.2.4 while the native .click() call does not. It's focus that behaved differently from other events previously. This may just be a limitation of the current jQuery event system; maybe it's something we can look at in the 5.0.0 planned event subsystem rewrite.
+
+
+mgol
+removed this from the 4.1.0 milestone on Feb 1, 2025
+timmywil
+timmywil commented on Feb 3, 2025
+timmywil
+on Feb 3, 2025
+Member
+We discussed in the meeting. I think the way @mgol was starting to lean is right. The behavior may be wrong, but is now consistently wrong across all events. If we're going to change the behavior, I'd like to change it for ALL events, not just focus, which makes this a bigger behavior change that should wait for a major version. Since 4.0 is almost at the finish line, it would need to wait for 5.0.
+
+
+timmywil
+added 
+Behavior Change
+ and removed 
+Discuss in Meeting
+Reserved for Issues and PRs that anyone would like to discuss in the weekly meeting.
+ on Feb 3, 2025
+
+timmywil
+added this to the 5.0.0 milestone on Feb 3, 2025
+timmywil
+timmywil commented on Feb 3, 2025
+timmywil
+on Feb 3, 2025
+Member
+Right after I said that, @gibson042 pointed out that there may be some precedent for differing behavior for focus events (and possibly the click event) depending on focusable. https://html.spec.whatwg.org/multipage/semantics-other.html#concept-element-disabled
+
+Elements which are not focusable are not focusable areas, and thus not sequentially focusable and not click focusable
+Being focusable is a statement about whether an element can be focused programmatically, e.g. via the focus() method or autofocus attribute. In contrast, sequentially focusable and click focusable govern how the user agent responds to user interaction: respectively, to sequential focus navigation and as activation behavior.
+
+We'll look into this further.
+
+
+ac-mmi
+linked a pull request that will close this issue on Feb 7, 2025
+Fix: focus event fires on disabled inputs #5623
+ac-mmi

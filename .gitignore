@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Model cache (downloaded from Hugging Face)
+.cache/
+models/
+continuator_engine/.mock_adapter/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Generated exports
+*_claude.md
+*_chatgpt.md
+*_gemini.md
+*_markdown.md
+
+# Node (if docs tooling added later)
+node_modules/

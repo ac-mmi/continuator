@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "continuator"
+version = "0.1.0"
+description = "Turn a long conversation into a continuation briefing for another AI."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Continuator contributors" }]
+keywords = ["ai", "conversation", "handoff", "continuation", "cli"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Utilities",
+]
+dependencies = [
+  "numpy",
+  "pydantic>=2.0",
+  "requests",
+  "rank-bm25",
+  "scikit-learn",
+  "rich>=13.0",
+  "textual>=0.80",
+  "huggingface_hub>=0.20",
+  "sentence-transformers>=2.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+mlx = ["mlx-lm>=0.19"]
+transformers = ["transformers>=4.40", "torch", "peft", "accelerate"]
+
+[project.scripts]
+continuator = "continuator.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/continuator-ai/continuator"
+Documentation = "https://github.com/continuator-ai/continuator#readme"
+Repository = "https://github.com/continuator-ai/continuator"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["continuator*"]
+
+[tool.setuptools.package-data]
+continuator = ["py.typed", "tui/*.tcss"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["continuator_engine"]
