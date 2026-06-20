@@ -4,6 +4,16 @@
 
 Continuator reads a long ChatGPT, Claude, or tutoring thread and produces a structured handoff briefing — project objective, current position, completed work, active problems, and next action — so you can paste context into a fresh chat and continue naturally.
 
+## Screenshots
+
+**Welcome screen** — launch the TUI with `continuator`:
+
+![Continuator welcome screen](docs/images/tui-welcome.png)
+
+**Explain view** — retrospective summary of a long conversation:
+
+![Continuator explain view](docs/images/tui-explain.png)
+
 ```bash
 pip install -e .
 continuator continue examples/neck.txt
@@ -19,7 +29,7 @@ continuator continue examples/neck.txt
 
 ## Install
 
-Requires **Python 3.10+**.
+Requires **Python 3.10+**. Works on **macOS, Windows, and Linux**.
 
 ```bash
 git clone https://github.com/continuator-ai/continuator.git
@@ -27,15 +37,18 @@ cd continuator
 git checkout release/v0.1
 
 python3 -m venv .venv
-source .venv/bin/activate
-pip install -e ".[dev]"
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -e .
 ```
 
-### Apple Silicon (MLX extraction)
+### Platform-specific extras
 
-```bash
-pip install -e ".[dev,mlx]"
-```
+| Platform | Install | Backend (auto) |
+|----------|---------|----------------|
+| **macOS Apple Silicon** | `pip install -e ".[mlx]"` | `mlx` (fast, recommended) |
+| **Windows / Linux / Intel Mac** | `pip install -e ".[transformers]"` | `transformers` |
+
+Continuator picks the backend automatically. Override with `MEMORY_EXTRACTOR_BACKEND` if needed.
 
 ### Model weights
 
@@ -104,7 +117,7 @@ Full CLI reference: [docs/cli-ux-examples.md](docs/cli-ux-examples.md)
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `MEMORY_EXTRACTOR_BACKEND` | `mlx` on macOS | `mlx`, `transformers`, or `mock` |
+| `MEMORY_EXTRACTOR_BACKEND` | auto: `mlx` (Apple Silicon) or `transformers` (elsewhere) | `mlx`, `transformers`, or `mock` |
 | `MEMORY_MODEL` | `v10` | Extraction schema version |
 | `MEMORY_EXTRACTOR_HF_REPO` | `ac-mmi/continuator-v10-lora` | Hugging Face adapter repo |
 | `MEMORY_EXTRACTOR_ADAPTER_PATH` | — | Local adapter directory (skips download) |
