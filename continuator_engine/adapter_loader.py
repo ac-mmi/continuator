@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 DEFAULT_HF_REPOS: dict[str, str] = {
-    "v10": "continuator-ai/continuator-v10-lora",
+    "v10": "ac-mmi/continuator-v10-lora",
     "v9": "continuator-ai/continuator-v9-lora",
 }
 

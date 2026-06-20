@@ -43,7 +43,7 @@ Continuator downloads the V10 LoRA adapter from Hugging Face on first run:
 
 ```bash
 # Optional: pre-download
-huggingface-cli download continuator-ai/continuator-v10-lora \
+hf download ac-mmi/continuator-v10-lora \
   --local-dir ~/.cache/continuator/models/v10
 export MEMORY_EXTRACTOR_ADAPTER_PATH=~/.cache/continuator/models/v10
 ```
@@ -106,7 +106,7 @@ Full CLI reference: [docs/cli-ux-examples.md](docs/cli-ux-examples.md)
 |----------|---------|---------|
 | `MEMORY_EXTRACTOR_BACKEND` | `mlx` on macOS | `mlx`, `transformers`, or `mock` |
 | `MEMORY_MODEL` | `v10` | Extraction schema version |
-| `MEMORY_EXTRACTOR_HF_REPO` | `continuator-ai/continuator-v10-lora` | Hugging Face adapter repo |
+| `MEMORY_EXTRACTOR_HF_REPO` | `ac-mmi/continuator-v10-lora` | Hugging Face adapter repo |
 | `MEMORY_EXTRACTOR_ADAPTER_PATH` | — | Local adapter directory (skips download) |
 | `CONTINUATOR_MODEL_CACHE` | `~/.cache/continuator/models` | Download cache |
 | `HF_TOKEN` | — | Hugging Face token for private repos |

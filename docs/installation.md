@@ -42,7 +42,7 @@ Pre-download:
 
 ```bash
 pip install huggingface_hub
-huggingface-cli download continuator-ai/continuator-v10-lora \
+hf download ac-mmi/continuator-v10-lora \
   --local-dir ~/.cache/continuator/models/v10
 ```
 
