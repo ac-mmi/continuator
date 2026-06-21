@@ -10,6 +10,7 @@ from continuator.commands import (
     benchmark_incremental_cmd,
     checkpoint_cmd,
     continue_cmd,
+    doctor_cmd,
     explain_cmd,
     export_cmd,
     inspect_cmd,
@@ -19,7 +20,18 @@ from continuator.commands import (
 from continuator.silence import configure_silence
 
 _SUBCOMMANDS = frozenset(
-    {"continue", "explain", "export", "inspect", "benchmark", "benchmark-incremental", "checkpoint", "resume", "serve"}
+    {
+        "continue",
+        "explain",
+        "export",
+        "inspect",
+        "benchmark",
+        "benchmark-incremental",
+        "checkpoint",
+        "resume",
+        "serve",
+        "doctor",
+    }
 )
 
 
@@ -66,6 +78,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
     continue_cmd.register(subparsers, parent=parent)
+    doctor_cmd.register(subparsers, parent=parent)
     checkpoint_cmd.register(subparsers, parent=parent)
     explain_cmd.register(subparsers, parent=parent)
     export_cmd.register(subparsers, parent=parent)

@@ -5,6 +5,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from continuator.checkpoint_mock import record_looks_mock
 from continuator.console import ContinuatorConsole, sanitize_error
 from continuator.platform.resume import load_and_resume
 from continuator.runtime import label_from_path, read_transcript
@@ -105,6 +106,14 @@ def run(args: argparse.Namespace) -> int:
         msg = sanitize_error(str(exc)) if not args.verbose else f"{type(exc).__name__}: {exc}"
         console.step_fail(msg)
         return 1
+
+    if not args.refresh and not args.quiet and record_looks_mock(record):
+        console.step_warn(
+            "This checkpoint was created with mock backend — cached briefing is fake test data."
+        )
+        console.step_warn(
+            "Run: continuator continue examples/neck.txt -v   or   continuator resume --refresh FILE"
+        )
 
     if args.output and not args.refresh:
         Path(args.output).write_text(text + ("\n" if not text.endswith("\n") else ""), encoding="utf-8")

@@ -20,6 +20,14 @@ def prepare_extraction(
     if backend == "mock":
         _warn_mock(console=console, quiet=quiet)
         return "mock"
+
+    if not quiet:
+        _say(
+            console,
+            f"Extraction backend: {backend or 'auto'}",
+            quiet=False,
+            warn=False,
+        )
     from adapter_loader import hf_repo_for_model
     from extraction_bootstrap_v1 import adapter_needs_download, ensure_extraction_assets
 

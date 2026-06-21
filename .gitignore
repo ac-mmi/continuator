@@ -33,6 +33,10 @@ continuator_engine/.mock_adapter/
 *_gemini.md
 *_markdown.md
 
+# Local checkpoints (may contain mock smoke-test data)
+.continuator/
+checkpoints/
+
 # Node (if docs tooling added later)
 node_modules/
 

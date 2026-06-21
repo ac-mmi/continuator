@@ -84,13 +84,14 @@ pip install -e ".[transformers]"
 
 ## Verify install (no model download)
 
-Confirms the CLI and TUI load correctly **without** downloading the LoRA adapter:
+Confirms the CLI loads **without** downloading the LoRA adapter. **Clear mock afterward** or every later run in that terminal stays fake:
 
 **macOS / Linux:**
 
 ```bash
 source .venv/bin/activate
 MEMORY_EXTRACTOR_BACKEND=mock continuator continue examples/neck.txt --quiet
+unset MEMORY_EXTRACTOR_BACKEND
 ```
 
 **Windows (PowerShell):**
@@ -99,9 +100,18 @@ MEMORY_EXTRACTOR_BACKEND=mock continuator continue examples/neck.txt --quiet
 .\.venv\Scripts\Activate.ps1
 $env:MEMORY_EXTRACTOR_BACKEND="mock"
 continuator continue examples/neck.txt --quiet
+Remove-Item Env:MEMORY_EXTRACTOR_BACKEND -ErrorAction SilentlyContinue
 ```
 
 You should see a structured briefing printed. If that works, installation succeeded.
+
+**Still seeing `mock conversation topic`?** Run:
+
+```powershell
+continuator doctor
+```
+
+That prints whether mock is still set, whether PyTorch is installed, and whether a stale mock checkpoint is being loaded.
 
 ---
 
@@ -195,6 +205,7 @@ continuator checkpoint my-chat.txt --update
 | Command | What it does |
 |---------|----------------|
 | `continuator` | Interactive terminal UI (default) |
+| `continuator doctor` | Diagnose mock backend / missing PyTorch / stale checkpoints |
 | `continuator continue FILE` | Continuation briefing |
 | `continuator explain FILE` | Retrospective summary |
 | `continuator checkpoint FILE` | Save v2 checkpoint |
@@ -227,7 +238,8 @@ Windows: use `%USERPROFILE%\.cache\continuator\models\v10` instead of `~/.cache/
 | Problem | Fix |
 |---------|-----|
 | TUI opens but nothing downloads | **Expected** until you press `O` and open a `.txt` file — or run `continuator continue FILE` in the shell |
-| Briefing says `mock conversation topic` | `MEMORY_EXTRACTOR_BACKEND=mock` is set — run `unset MEMORY_EXTRACTOR_BACKEND` (macOS/Linux) or `Remove-Item Env:MEMORY_EXTRACTOR_BACKEND` (Windows) |
+| Briefing says `mock conversation topic` | Run `continuator doctor`. Usually: (1) `MEMORY_EXTRACTOR_BACKEND=mock` still set from the smoke test — `Remove-Item Env:MEMORY_EXTRACTOR_BACKEND` on Windows; (2) `continuator resume` loaded a **cached mock checkpoint** — use `continuator continue FILE -v` instead |
+| `continuator resume` shows mock instantly | Cached checkpoint from smoke test or old clone — delete `.continuator/checkpoint.yaml` or run `continuator resume --refresh FILE` |
 | Analysis fails on Windows (no download) | Install transformers backend: `pip install -e ".[transformers]"` — not just `pip install -e .` |
 | Errors hidden in TUI | Re-run with `continuator continue examples/neck.txt -v` in PowerShell to see full output |
 | `continuator: command not found` | Activate venv: `source .venv/bin/activate` (macOS/Linux) or `.\.venv\Scripts\Activate.ps1` (Windows) |
