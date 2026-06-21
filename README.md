@@ -243,7 +243,7 @@ Windows: use `%USERPROFILE%\.cache\continuator\models\v10` instead of `~/.cache/
 | Briefing says `mock conversation topic` | Run `continuator doctor`. Usually: (1) `MEMORY_EXTRACTOR_BACKEND=mock` still set from the smoke test — `Remove-Item Env:MEMORY_EXTRACTOR_BACKEND` on Windows; (2) `continuator resume` loaded a **cached mock checkpoint** — use `continuator continue FILE -v` instead |
 | `continuator resume` shows mock instantly | Cached checkpoint from smoke test or old clone — delete `.continuator/checkpoint.yaml` or run `continuator resume --refresh FILE` |
 | Analysis fails on Windows (no download) | Install transformers backend: `pip install -e ".[transformers]"` — not just `pip install -e .` |
-| Empty briefing / `KeyError: 'peft_type'` in `--json` | Old builds failed on MLX-only adapter config. **Update Continuator** — transformers backend auto-converts the HF adapter. Then delete `%USERPROFILE%\.cache\continuator\models\v10\.peft_compat` and re-run `continuator continue examples/gitissue.txt -v` |
+| Empty briefing / `KeyError: 'peft_type'` in `--json` | Update Continuator, then delete the PEFT cache and re-run: `Remove-Item -Recurse -Force $env:USERPROFILE\.cache\continuator\models\v10\.peft_compat_v2` (Windows) or `rm -rf ~/.cache/continuator/models/v10/.peft_compat_v2` (macOS/Linux). Then `continuator continue examples/gitissue.txt -v` |
 | Errors hidden in TUI | Re-run with `continuator continue examples/neck.txt -v` in PowerShell to see full output |
 | `continuator: command not found` | Activate venv: `source .venv/bin/activate` (macOS/Linux) or `.\.venv\Scripts\Activate.ps1` (Windows) |
 | `No module named 'checkpoint_merge_v1'` | Reinstall from repo root: `pip install -e .` (or `pip install -e ".[mlx]"` / `".[transformers]"`) |

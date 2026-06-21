@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 _MLX_WEIGHT_NAMES = ("adapters.safetensors", "adapter_model.safetensors")
-_PEFT_STAMP = ".peft_compat"
+_PEFT_STAMP = ".peft_compat_v2"
 _LAYER_RX = re.compile(r"\.layers\.(\d+)\.")
 
 
@@ -59,7 +59,8 @@ def mlx_config_to_peft(mlx_config: dict[str, Any], *, layer_indices: list[int] |
     lora = dict(mlx_config.get("lora_parameters") or {})
     rank = int(lora.get("rank") or mlx_config.get("r") or 8)
     alpha_raw = lora.get("scale", lora.get("lora_alpha", mlx_config.get("lora_alpha", rank)))
-    alpha = int(float(alpha_raw))
+    # MLX-LM stores `scale` where PEFT expects `lora_alpha` ≈ scale * rank.
+    alpha = int(float(alpha_raw) * rank) if "scale" in lora else int(float(alpha_raw))
     dropout = float(lora.get("dropout", lora.get("lora_dropout", 0.0)))
     base_model = str(
         mlx_config.get("model")
@@ -146,6 +147,7 @@ def convert_mlx_adapter_to_peft(
             if not mapped:
                 continue
             tensor = reader.get_tensor(key)
+            # MLX lora_a/lora_b layouts differ from PEFT; both need transpose.
             state[mapped] = tensor.T.contiguous()
 
     if not state:
@@ -160,6 +162,46 @@ def convert_mlx_adapter_to_peft(
 
 def peft_compat_cache_dir(adapter_dir: Path) -> Path:
     return adapter_dir / _PEFT_STAMP
+
+
+def load_transformers_peft_model(base_model: str, adapter_dir: Path):
+    """Load base causal LM + MLX-converted (or native) PEFT LoRA for inference."""
+    import torch
+    from peft import LoraConfig, get_peft_model
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    adapter_dir = adapter_dir.expanduser().resolve()
+    cfg = read_adapter_config(adapter_dir)
+    if not is_peft_adapter_config(cfg):
+        raise ValueError(f"PEFT adapter config missing at {adapter_dir}")
+
+    weights_path = adapter_dir / "adapter_model.safetensors"
+    if not weights_path.is_file():
+        raise FileNotFoundError(f"PEFT adapter weights missing: {weights_path}")
+
+    tokenizer = AutoTokenizer.from_pretrained(base_model, trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(
+        base_model,
+        trust_remote_code=True,
+        torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+    )
+    lora_cfg = LoraConfig(
+        r=int(cfg.get("r") or 8),
+        lora_alpha=int(cfg.get("lora_alpha") or 16),
+        lora_dropout=float(cfg.get("lora_dropout") or 0.0),
+        target_modules=list(cfg.get("target_modules") or []),
+        layers_to_transform=list(cfg.get("layers_to_transform") or []) or None,
+        bias=str(cfg.get("bias") or "none"),
+        task_type="CAUSAL_LM",
+    )
+    model = get_peft_model(model, lora_cfg)
+
+    from safetensors.torch import load_file
+
+    state = load_file(str(weights_path))
+    model.load_state_dict(state, strict=False)
+    model.eval()
+    return model, tokenizer
 
 
 def resolve_peft_adapter_dir(adapter_dir: Path, *, force_rebuild: bool = False) -> Path:

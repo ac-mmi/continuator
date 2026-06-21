@@ -31,7 +31,7 @@ def test_mlx_config_to_peft_mapping():
     )
     assert cfg["peft_type"] == "LORA"
     assert cfg["r"] == 8
-    assert cfg["lora_alpha"] == 20
+    assert cfg["lora_alpha"] == 160
     assert cfg["layers_to_transform"] == [12, 13]
 
 
@@ -64,5 +64,5 @@ def test_convert_mlx_adapter_roundtrip(tmp_path: Path):
     assert (out / "adapter_model.safetensors").is_file()
 
     resolved = resolve_peft_adapter_dir(mlx_dir)
-    assert resolved == mlx_dir / ".peft_compat"
+    assert resolved == mlx_dir / ".peft_compat_v2"
     assert is_peft_adapter_config(read_adapter_config(resolved))
