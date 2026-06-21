@@ -123,11 +123,13 @@ The first extraction downloads from Hugging Face (~1–5 minutes depending on co
 
 | Component | Source |
 |-----------|--------|
-| V10 LoRA adapter | `ac-mmi/continuator-v10-lora` |
+| V10 LoRA adapter | [ac-mmi/continuator-v10-lora](https://huggingface.co/ac-mmi/continuator-v10-lora) |
 | Base model | `Qwen/Qwen2.5-1.5B-Instruct` |
 | Chunk ranker embedder | `sentence-transformers/all-MiniLM-L6-v2` |
 
-**Windows:** You must install the transformers extra (`pip install -e ".[transformers]"`). The base `pip install -e .` alone does **not** install PyTorch. If analysis fails silently in the TUI, test in PowerShell first:
+**Adapter format:** The Hugging Face repo ships **MLX-trained** LoRA files (`adapter_config.json` + `adapters.safetensors`). Apple Silicon uses them directly via `mlx-lm`. On **Windows/Linux**, Continuator **auto-converts** to PEFT layout on first run (cached under `.peft_compat/` in the model cache). You do not need a second download.
+
+**Windows:** You must install the transformers extra (`pip install -e ".[transformers]"`). The base `pip install -e .` alone does **not** install PyTorch. First extraction may take a few minutes (base model + LoRA conversion + inference on CPU). Test in PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -241,6 +243,7 @@ Windows: use `%USERPROFILE%\.cache\continuator\models\v10` instead of `~/.cache/
 | Briefing says `mock conversation topic` | Run `continuator doctor`. Usually: (1) `MEMORY_EXTRACTOR_BACKEND=mock` still set from the smoke test — `Remove-Item Env:MEMORY_EXTRACTOR_BACKEND` on Windows; (2) `continuator resume` loaded a **cached mock checkpoint** — use `continuator continue FILE -v` instead |
 | `continuator resume` shows mock instantly | Cached checkpoint from smoke test or old clone — delete `.continuator/checkpoint.yaml` or run `continuator resume --refresh FILE` |
 | Analysis fails on Windows (no download) | Install transformers backend: `pip install -e ".[transformers]"` — not just `pip install -e .` |
+| Empty briefing / `KeyError: 'peft_type'` in `--json` | Old builds failed on MLX-only adapter config. **Update Continuator** — transformers backend auto-converts the HF adapter. Then delete `%USERPROFILE%\.cache\continuator\models\v10\.peft_compat` and re-run `continuator continue examples/gitissue.txt -v` |
 | Errors hidden in TUI | Re-run with `continuator continue examples/neck.txt -v` in PowerShell to see full output |
 | `continuator: command not found` | Activate venv: `source .venv/bin/activate` (macOS/Linux) or `.\.venv\Scripts\Activate.ps1` (Windows) |
 | `No module named 'checkpoint_merge_v1'` | Reinstall from repo root: `pip install -e .` (or `pip install -e ".[mlx]"` / `".[transformers]"`) |
@@ -284,7 +287,23 @@ examples/              Sample conversations
 validation_runs/       Output from validation runner (optional)
 ```
 
+- **V10 LoRA** on `Qwen2.5-1.5B-Instruct` — structured extraction (Continue/Explain)
+- **Chunk ranker** — `sentence-transformers/all-MiniLM-L6-v2`
+- **Checkpoint v2** — `.continuator/checkpoint.yaml` with cached exports
+- **Backends:** `mlx` (Apple Silicon), `transformers` (Windows/Linux/Intel Mac). Same [HF LoRA repo](https://huggingface.co/ac-mmi/continuator-v10-lora); transformers path converts MLX adapter metadata to PEFT automatically.
+
 Extraction uses a fine-tuned LoRA on Qwen2.5-1.5B-Instruct. Weights are fetched from Hugging Face — not stored in Git.
+
+### Publishing PEFT files to Hugging Face (maintainers)
+
+Mac users keep `adapters.safetensors` + MLX `adapter_config.json`. To speed up Windows first-run (skip local conversion), also upload PEFT files:
+
+```bash
+python scripts/convert_mlx_lora_to_peft.py \
+  --input ~/.cache/continuator/models/v10 \
+  --output ./peft_upload/v10
+# Upload adapter_config.json (PEFT) + adapter_model.safetensors alongside existing MLX files
+```
 
 ---
 

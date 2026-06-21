@@ -20,6 +20,7 @@ venv/
 .cache/
 models/
 continuator_engine/.mock_adapter/
+**/.peft_compat/
 
 # OS / editor
 .DS_Store

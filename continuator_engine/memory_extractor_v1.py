@@ -971,6 +971,10 @@ def _load_transformers(adapter_key: str):
             "transformers and peft are required for MEMORY_EXTRACTOR_BACKEND=transformers"
         ) from exc
 
+    from adapter_peft_compat import resolve_peft_adapter_dir
+
+    peft_adapter = resolve_peft_adapter_dir(adapter)
+
     base = _base_model()
     tokenizer = AutoTokenizer.from_pretrained(base, trust_remote_code=True)
     model = AutoModelForCausalLM.from_pretrained(
@@ -978,7 +982,7 @@ def _load_transformers(adapter_key: str):
         trust_remote_code=True,
         torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
     )
-    model = PeftModel.from_pretrained(model, str(adapter))
+    model = PeftModel.from_pretrained(model, str(peft_adapter))
     model.eval()
     _log_extractor_init_once()
     return model, tokenizer

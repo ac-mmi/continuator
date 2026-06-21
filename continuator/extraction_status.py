@@ -19,6 +19,7 @@ class ExtractionStatus:
     torch_ok: bool
     mlx_ok: bool
     adapter_ready: bool
+    mlx_adapter_format: bool = False
     issues: list[str] = field(default_factory=list)
     fixes: list[str] = field(default_factory=list)
 
@@ -46,8 +47,14 @@ def collect_extraction_status() -> ExtractionStatus:
     mlx_ok = _can_import("mlx_lm")
 
     adapter_ready = False
+    mlx_adapter_config = False
     if effective != "mock":
         try:
+            from adapter_loader import ensure_adapter
+            from adapter_peft_compat import is_mlx_adapter_config, read_adapter_config
+
+            adapter_path = ensure_adapter("v10")
+            mlx_adapter_config = is_mlx_adapter_config(read_adapter_config(adapter_path))
             from extraction_bootstrap_v1 import adapter_needs_download
 
             adapter_ready = not adapter_needs_download()
@@ -81,6 +88,7 @@ def collect_extraction_status() -> ExtractionStatus:
         torch_ok=torch_ok,
         mlx_ok=mlx_ok,
         adapter_ready=adapter_ready,
+        mlx_adapter_format=mlx_adapter_config,
         issues=issues,
         fixes=fixes,
     )
@@ -141,6 +149,8 @@ def format_status_report(status: ExtractionStatus, *, cwd: Path | None = None) -
         f"  mlx-lm:         {'ok' if status.mlx_ok else 'missing'}",
         f"  V10 adapter:    {'cached' if status.adapter_ready else 'not downloaded yet'}",
     ]
+    if status.mlx_adapter_format and status.effective_backend == "transformers":
+        lines.append("  HF adapter:     MLX format (auto-converts to PEFT on first extraction)")
 
     mock_ckpts = find_stale_mock_checkpoints(cwd)
     if mock_ckpts:
