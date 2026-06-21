@@ -186,9 +186,7 @@ continuator checkpoint my-chat.txt --update
 | `continuator inspect FILE` | Chunk/ranker audit (no extraction) |
 | `continuator benchmark DIR` | Batch quality check on a folder |
 
-Use `-` as the file to read from stdin (see clipboard examples above). Add `-q` for minimal output, `-v` for technical details.
-
-Full reference: [docs/cli-ux-examples.md](docs/cli-ux-examples.md)
+Use `-` as the file to read from stdin (see clipboard examples above). Add `-q` for minimal output, `-v` for technical details. Run `continuator --help` for all subcommands.
 
 ---
 
@@ -221,7 +219,7 @@ Windows: use `%USERPROFILE%\.cache\continuator\models\v10` instead of `~/.cache/
 | Weak / useless briefing | Thread may be Q&A or medical chat — try `examples/gitissue.txt` instead |
 | Windows script execution blocked | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` then re-activate venv |
 
-More: [docs/installation.md](docs/installation.md) · [`.env.example`](.env.example)
+More: [`.env.example`](.env.example)
 
 ---
 
@@ -241,8 +239,6 @@ More: [docs/installation.md](docs/installation.md) · [`.env.example`](.env.exam
 pip install -e ".[dev]"
 pytest
 ```
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 

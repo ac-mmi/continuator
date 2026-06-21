@@ -35,3 +35,10 @@ continuator_engine/.mock_adapter/
 
 # Node (if docs tooling added later)
 node_modules/
+
+# Markdown — public repo ships root README.md only (planning/validation docs stay local)
+*.md
+!/README.md
+
+# Validation run output
+validation_runs/
