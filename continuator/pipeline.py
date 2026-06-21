@@ -6,6 +6,7 @@ import time
 from typing import TYPE_CHECKING, Any
 
 from continuator.runtime import ensure_runtime
+from continuator.model_prep import prepare_extraction
 from continuator.silence import shield_libraries
 
 if TYPE_CHECKING:
@@ -22,6 +23,7 @@ def run_continuation(
 ) -> dict[str, Any]:
     """Run the continuator pipeline with human-readable progress."""
     ensure_runtime()
+    prepare_extraction(console, quiet=bool(console and console.quiet), verbose=verbose)
     from handoff_evaluation_v1 import iter_continuator_stream
 
     started = time.perf_counter()

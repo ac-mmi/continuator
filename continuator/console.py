@@ -256,6 +256,11 @@ class ContinuatorConsole:
         if self.verbose:
             self.verbose_line(f"{chars:,} characters")
 
+    def on_model_download(self, message: str) -> None:
+        if self.quiet:
+            return
+        self.step_warn(message)
+
     def on_ranked(self, *, selected: list[int], total: int, strategy: str) -> None:
         self._analyze_total = max(len(selected), 1)
         if not self.verbose:

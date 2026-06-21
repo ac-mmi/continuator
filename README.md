@@ -227,6 +227,7 @@ Windows: use `%USERPROFILE%\.cache\continuator\models\v10` instead of `~/.cache/
 | Problem | Fix |
 |---------|-----|
 | TUI opens but nothing downloads | **Expected** until you press `O` and open a `.txt` file — or run `continuator continue FILE` in the shell |
+| Briefing says `mock conversation topic` | `MEMORY_EXTRACTOR_BACKEND=mock` is set — run `unset MEMORY_EXTRACTOR_BACKEND` (macOS/Linux) or `Remove-Item Env:MEMORY_EXTRACTOR_BACKEND` (Windows) |
 | Analysis fails on Windows (no download) | Install transformers backend: `pip install -e ".[transformers]"` — not just `pip install -e .` |
 | Errors hidden in TUI | Re-run with `continuator continue examples/neck.txt -v` in PowerShell to see full output |
 | `continuator: command not found` | Activate venv: `source .venv/bin/activate` (macOS/Linux) or `.\.venv\Scripts\Activate.ps1` (Windows) |

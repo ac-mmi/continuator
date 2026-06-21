@@ -79,6 +79,14 @@ class TuiConsole:
         self._call("post_file_stats", chars=chars, chunks=sections)
         self._step("Ranking conversation sections…", progress=0.08)
 
+    def on_model_download(self, message: str) -> None:
+        self._active(message)
+        self._status(message)
+
+    def step_warn(self, message: str) -> None:
+        self._active(message)
+        self._status(message)
+
     def on_ranked(self, *, selected: list[int], total: int, strategy: str) -> None:
         self._progress_total = max(len(selected), 1)
         if not self._rank_logged:
@@ -86,13 +94,6 @@ class TuiConsole:
             nums = ", ".join(str(i + 1) for i in selected) or "all"
             self._done(f"Selected frontier chunks: {nums}")
             self._active("Extracting continuation state")
-            try:
-                from adapter_loader import _adapter_ready, cache_root
-
-                if not _adapter_ready(cache_root() / "v10"):
-                    self._status("First run: downloading models from Hugging Face (one-time)…")
-            except Exception:
-                pass
             self._call("post_rank_detail", selected=selected, total=total, strategy=strategy)
             detail = f"Strategy: {strategy} · focus {len(selected)} of {total}"
             self._status(detail)

@@ -49,8 +49,10 @@ def extract_full(
     use_chunk_ranker: bool = True,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Full V10 extract → v2 CheckpointRecord."""
+    from continuator.model_prep import prepare_extraction
     from handoff_evaluation_v1 import run_continuator
 
+    prepare_extraction()
     started = time.perf_counter()
     session = run_continuator(
         transcript,
@@ -88,8 +90,10 @@ def extract_incremental(
             "Transcript changed non-append-only; run full checkpoint or resume --refresh"
         )
 
+    from continuator.model_prep import prepare_extraction
     from handoff_evaluation_v1 import run_continuator_incremental
 
+    prepare_extraction()
     started = time.perf_counter()
     pipeline = dict(prior.get("pipeline") or {})
     session, merge_stats = run_continuator_incremental(
