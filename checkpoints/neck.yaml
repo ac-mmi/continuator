@@ -1,0 +1,12 @@
+project: neck
+objective:
+  - mock conversation topic (chunk 2/1)
+  - mock goal chunk 2
+  - mock question chunk 2
+  - mock next step chunk 2
+current_state: mock summary for chunk 2 of 1.
+completed_work: []
+active_problems: []
+constraints: []
+next_action: |
+  Pick up from tutor offer: a 5-minute daily routine tailored to your gym + tendonitis situation so it

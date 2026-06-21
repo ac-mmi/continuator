@@ -1,0 +1,470 @@
+checkpoint:
+  format_version: 2
+  id: eaec2a2f
+  project: neck
+  label: neck
+  message: ''
+  created_at: '2026-06-21T10:14:27.970713+00:00'
+  updated_at: '2026-06-21T10:14:27.970713+00:00'
+  source:
+    kind: file
+    path: /Users/acmmi/projects/continuator-release/examples/neck.txt
+    platform: unknown
+    conversation_id: ''
+    sha256: d15f486ca2f034b989a4eb12ebdfa68ad9e1a9e44f4b781ae026bcd816dfab28
+    char_count: 1824
+    message_count: 0
+    transcript_snapshot: 'slight hump on nekc due to bad psoture how to remove it
+
+      That “slight hump” on the neck is very common—people usually call it a forward
+      head posture or a mild
+
+      dowager’s hump. The good news: if it’s from posture (not structural bone change),
+      it’s usually reversible
+
+      with consistent work.
+
+      🧠 What’s actually happening
+
+      Your head is drifting forward (from laptop/phone use)
+
+      Upper back (thoracic spine) rounds
+
+      Neck muscles tighten in the front, weaken in the back
+
+      🏋️‍♂️ Key Exercises (do daily)
+
+      1. Chin Tucks (MOST IMPORTANT)
+
+      6
+
+      Stand against a wall
+
+      Pull your chin straight back (not down)
+
+      Hold 5 sec × 10 reps
+
+      👉 This directly fixes forward head posture.
+
+      2. Wall Angels
+
+      Back flat to wall
+
+      Raise arms like a goalpost and slide up/down
+
+      Keep lower back + head touching wall
+
+      👉 Opens chest + strengthens upper back.
+
+      3. Chest Stretch (Doorway Stretch)
+
+      6
+
+      Hands on door frame
+
+      Lean forward gently
+
+      Hold 20–30 sec
+
+      👉 Loosens tight chest pulling shoulders forward.
+
+      4. Thoracic Extensions
+
+      Use foam roller or chair
+
+      Extend upper back over it
+
+      6
+
+      5
+
+      👉 Fixes the rounded upper spine (the real root).
+
+      🧩 Daily Habit Fix (this matters more than exercises)
+
+      Screen at eye level
+
+      Don’t look down at phone → bring phone up
+
+      Every 30–40 min → posture reset:
+
+      shoulders back
+
+      chin tucked
+
+      ⏱️ Timeline (realistic)
+
+      2 weeks → you feel better
+
+      4–6 weeks → visible improvement
+
+      2–3 months → major correction (if consistent)
+
+      ⚠️ When it’s NOT just posture
+
+      If you notice:
+
+      Hard, fixed bump (doesn’t change with posture)
+
+      Pain, numbness, or tingling
+
+      → get checked (could be structural or fat pad)
+
+      💡 Straight talk (important)
+
+      You can’t “massage it away” or fix it with random gym lifts.
+
+      If you keep sitting like before, it will come back no matter what.
+
+      If you want, I can give you a 5-minute daily routine tailored to your gym +
+      tendonitis situation so it
+
+      doesn’t mess your elbows.'
+  engine:
+    baseline: v10-050+repair+continuation_export_v2_frontier+explain_v1
+    memory_model: v10
+    archetype: mixed
+    extractor_backend: mock
+  state:
+    project_title: neck
+    objective:
+    - mock conversation topic (chunk 2/1)
+    - mock goal chunk 2
+    - mock question chunk 2
+    - mock next step chunk 2
+    current_state: mock summary for chunk 2 of 1.
+    completed_work: []
+    active_problems: []
+    constraints: []
+    next_action: 'Pick up from tutor offer: a 5-minute daily routine tailored to your
+      gym + tendonitis situation so it'
+    closure_detected: false
+  cached_exports:
+    briefing: '## PROJECT
+
+
+      neck
+
+
+      Objective:
+
+      mock conversation topic (chunk 2/1)
+
+      - mock goal chunk 2
+
+      - mock question chunk 2
+
+      - mock next step chunk 2
+
+
+      Current Position:
+
+      mock summary for chunk 2 of 1.
+
+
+      Completed Work:
+
+      None identified.
+
+
+      Active Problems:
+
+      None identified.
+
+
+      Constraints:
+
+      None identified.
+
+
+      Next Action:
+
+      Pick up from tutor offer: a 5-minute daily routine tailored to your gym + tendonitis
+      situation so it'
+    explain: 'OVERVIEW
+
+
+      mock summary for chunk 2 of 1 (neck).
+
+
+      MAIN TOPICS
+
+
+      - mock conversation topic (chunk 2/1)
+
+
+      LEARNINGS / DECISIONS
+
+
+      - mock decision chunk 2
+
+      - mock goal chunk 2
+
+
+      CURRENT STATUS
+
+
+      mock summary for chunk 2 of 1.
+
+
+      OPEN QUESTIONS
+
+
+      - mock question chunk 2
+
+      - mock goal chunk 2
+
+
+      KEY TAKEAWAYS
+
+
+      - mock fact from chunk 2
+
+      - Major thread: mock conversation topic (chunk 2/1)
+
+      - mock decision chunk 2
+
+      - mock goal chunk 2'
+    claude: 'Continue this conversation (neck). Treat the briefing below as your only
+      prior context.
+
+      Do not summarize for the user — continue naturally from the stopping point.
+
+
+      ## PROJECT
+
+
+      neck
+
+
+      Objective:
+
+      mock conversation topic (chunk 2/1)
+
+      - mock goal chunk 2
+
+      - mock question chunk 2
+
+      - mock next step chunk 2
+
+
+      Current Position:
+
+      mock summary for chunk 2 of 1.
+
+
+      Completed Work:
+
+      None identified.
+
+
+      Active Problems:
+
+      None identified.
+
+
+      Constraints:
+
+      None identified.
+
+
+      Next Action:
+
+      Pick up from tutor offer: a 5-minute daily routine tailored to your gym + tendonitis
+      situation so it'
+    chatgpt: '# Conversation handoff — neck
+
+
+      Paste into a new ChatGPT thread. Continue from where the prior conversation
+      stopped.
+
+
+      ## PROJECT
+
+
+      neck
+
+
+      Objective:
+
+      mock conversation topic (chunk 2/1)
+
+      - mock goal chunk 2
+
+      - mock question chunk 2
+
+      - mock next step chunk 2
+
+
+      Current Position:
+
+      mock summary for chunk 2 of 1.
+
+
+      Completed Work:
+
+      None identified.
+
+
+      Active Problems:
+
+      None identified.
+
+
+      Constraints:
+
+      None identified.
+
+
+      Next Action:
+
+      Pick up from tutor offer: a 5-minute daily routine tailored to your gym + tendonitis
+      situation so it
+
+
+      ---
+
+      Please continue the conversation from the current position.'
+    gemini: 'You are picking up an in-progress conversation for: neck.
+
+      Use this briefing as your context and continue without recapping for a human
+      audience.
+
+
+      ## PROJECT
+
+
+      neck
+
+
+      Objective:
+
+      mock conversation topic (chunk 2/1)
+
+      - mock goal chunk 2
+
+      - mock question chunk 2
+
+      - mock next step chunk 2
+
+
+      Current Position:
+
+      mock summary for chunk 2 of 1.
+
+
+      Completed Work:
+
+      None identified.
+
+
+      Active Problems:
+
+      None identified.
+
+
+      Constraints:
+
+      None identified.
+
+
+      Next Action:
+
+      Pick up from tutor offer: a 5-minute daily routine tailored to your gym + tendonitis
+      situation so it'
+    markdown: '# AI Handoff — neck
+
+
+      ## PROJECT
+
+
+      neck
+
+
+      Objective:
+
+      mock conversation topic (chunk 2/1)
+
+      - mock goal chunk 2
+
+      - mock question chunk 2
+
+      - mock next step chunk 2
+
+
+      Current Position:
+
+      mock summary for chunk 2 of 1.
+
+
+      Completed Work:
+
+      None identified.
+
+
+      Active Problems:
+
+      None identified.
+
+
+      Constraints:
+
+      None identified.
+
+
+      Next Action:
+
+      Pick up from tutor offer: a 5-minute daily routine tailored to your gym + tendonitis
+      situation so it'
+  stats:
+    briefing_words: 65
+    explain_words: 77
+    compression_ratio: 4.6
+    extraction_parse_rate: 1.0
+    runtime_seconds: 0.0
+  pipeline:
+    chunking:
+      strategy: short_circuit
+      chunk_count: 1
+    ranker:
+      strategy: full
+      k: 1
+      total_chunks: 1
+      selected_indices:
+      - 0
+      locked_indices: []
+    frontier:
+      cutoff_index: 0
+      band_size: 2
+      indices:
+      - 0
+      selected_in_frontier:
+      - 0
+    chunk_extractions:
+    - chunk_index: 0
+      input_chars: 1824
+      content_hash: d15f486ca2f034b9
+      parse_ok: true
+      output:
+        topic: mock conversation topic (chunk 2/1)
+        summary: mock summary for chunk 2 of 1.
+        important_facts:
+        - mock fact from chunk 2
+        goals:
+        - mock goal chunk 2
+        decisions:
+        - mock decision chunk 2
+        next_steps:
+        - mock next step chunk 2
+        open_questions:
+        - mock question chunk 2
+        objective: []
+        current_state: ''
+        completed_work: []
+        active_problems: []
+        resolved_problems: []
+        constraints: []
+        continuation_context: ''
+        model_id: mock
+        memory_model: v10
+        parse_ok: true

@@ -5,10 +5,22 @@ import argparse
 import sys
 
 from continuator import __version__
-from continuator.commands import benchmark_cmd, continue_cmd, explain_cmd, export_cmd, inspect_cmd
+from continuator.commands import (
+    benchmark_cmd,
+    benchmark_incremental_cmd,
+    checkpoint_cmd,
+    continue_cmd,
+    explain_cmd,
+    export_cmd,
+    inspect_cmd,
+    resume_cmd,
+    serve_cmd,
+)
 from continuator.silence import configure_silence
 
-_SUBCOMMANDS = frozenset({"continue", "explain", "export", "inspect", "benchmark"})
+_SUBCOMMANDS = frozenset(
+    {"continue", "explain", "export", "inspect", "benchmark", "benchmark-incremental", "checkpoint", "resume", "serve"}
+)
 
 
 def _shared_parent() -> argparse.ArgumentParser:
@@ -40,6 +52,7 @@ def build_parser() -> argparse.ArgumentParser:
         epilog=(
             "Examples:\n"
             "  continuator continue chat.txt\n"
+            "  continuator checkpoint chat.txt\n"
             "  continuator explain chat.txt\n"
             "  continuator export chat.txt --for claude\n"
             "  continuator inspect chat.txt --verbose\n"
@@ -53,10 +66,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
     continue_cmd.register(subparsers, parent=parent)
+    checkpoint_cmd.register(subparsers, parent=parent)
     explain_cmd.register(subparsers, parent=parent)
     export_cmd.register(subparsers, parent=parent)
     inspect_cmd.register(subparsers, parent=parent)
     benchmark_cmd.register(subparsers, parent=parent)
+    benchmark_incremental_cmd.register(subparsers, parent=parent)
+    resume_cmd.register(subparsers, parent=parent)
+    serve_cmd.register(subparsers, parent=parent)
     return parser
 
 

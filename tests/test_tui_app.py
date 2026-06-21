@@ -5,6 +5,7 @@ import asyncio
 
 from continuator.tui.app import ContinuatorApp, OpenFileScreen
 from continuator.tui.briefing_render import briefing_markup
+from continuator.title_art import TITLE_PLAIN_SIGNATURE
 
 
 def test_briefing_markup_highlights_critical_sections() -> None:
@@ -23,7 +24,9 @@ def test_tui_welcome_and_briefing_display() -> None:
     async def run() -> None:
         app = ContinuatorApp(conversation=None)
         async with app.run_test(size=(120, 45)) as pilot:
-            assert "AI CONTINUATOR" in pilot.app.query_one("#welcome-body").render().plain
+            assert TITLE_PLAIN_SIGNATURE in str(pilot.app.query_one("#hero-logo").render())
+            tagline = pilot.app.query_one("#hero-tagline").render()
+            assert "Turn conversations into AI continuation briefings." in str(tagline)
             assert pilot.app.query_one("#workspace-view").has_class("hidden")
             assert "Ready" in pilot.app.query_one("#status-bar").render().plain
             assert pilot.app.query_one("#btn-copy").disabled is True

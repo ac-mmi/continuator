@@ -14,6 +14,7 @@ from rich.table import Table
 from rich.text import Text
 
 from continuator import theme as T
+from continuator.title_art import title_renderable
 from continuator.keyboard import copy_to_clipboard, read_key
 from continuator.runtime import default_export_path
 from continuator.silence import configure_silence, real_stderr, real_stdout, shield_libraries
@@ -162,7 +163,7 @@ def _panel_from_blocks(blocks: list[RenderableType]) -> Panel:
 
 def render_branded_header() -> Panel:
     body = Group(
-        Align.center(Text("AI CONTINUATOR", style=T.HEADER_TITLE)),
+        Align.center(title_renderable()),
         Align.center(Text("Turn conversations into AI handoffs", style=T.HEADER_TAGLINE)),
     )
     return _full_width_panel(body, padding=(1, 2))

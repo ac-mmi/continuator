@@ -327,80 +327,17 @@ def generate_continuation_briefing_frontier(
     if not chunk_outputs:
         return ""
 
-    states = _normalize_states(chunk_outputs)
-    if not states:
-        return ""
+    from checkpoint_state_v1 import build_checkpoint_state, render_briefing_from_checkpoint_state
 
-    n_total = total_chunks if total_chunks is not None else _total_chunk_count(states)
-    history, frontier, cutoff = _split_history_frontier(states, total_chunks=n_total)
-    terminal = _terminal_chunk(frontier)
-    hints = _conversation_frontier_hints(conversation)
-    closed = continuation_closure_detected(terminal, conversation)
-
-    # --- Frontier merge ---
-    position = hints.get("position") or _terminal_position(terminal)
-    if not position:
-        position = _terminal_position(_terminal_chunk(states))
-
-    completed = _aggregate_list_field(states, "completed_work")
-    constraints = _aggregate_list_field(states, "constraints")
-
-    frontier_actives = filter_superseded_actives(
-        _aggregate_list_field(frontier, "active_problems"),
-        terminal=terminal,
+    state = build_checkpoint_state(
+        chunk_outputs,
         conversation=conversation,
-        closure=closed,
-    )
-
-    resolved = _aggregate_list_field(frontier, "resolved_problems")
-    if resolved:
-        frontier_actives = [
-            a for a in frontier_actives if not any(_sentence_overlap(a, r) for r in resolved)
-        ]
-
-    objective_text = _frontier_objective(frontier, history, conversation=conversation)
-    next_action = _derive_frontier_next_action(
-        frontier,
-        position=position,
         archetype=archetype,
-        conversation=conversation,
-        hints=hints,
+        label=label,
+        project=label,
+        total_chunks=total_chunks,
     )
-    title = _project_title(states, label=label)
-
-    if not position and completed:
-        position = f"Work in progress. Latest completed: {completed[-1]}"
-
-    lines = [
-        "## PROJECT",
-        "",
-        title,
-        "",
-        "Objective:",
-        objective_text,
-        "",
-        "Current Position:",
-        position or "Conversation stopped mid-thread; use completed work and next action below.",
-        "",
-        "Completed Work:",
-        _format_list_section(completed),
-        "",
-        "Active Problems:",
-        _format_list_section(frontier_actives),
-        "",
-        "Constraints:",
-        _format_list_section(constraints),
-        "",
-        "Next Action:",
-        next_action,
-    ]
-
-    text = "\n".join(lines).strip()
-    for forbidden in ("The slice", "The discussion is focused", "The participant"):
-        if forbidden.lower() in text.lower():
-            text = _clean_voice_preserve_lines(text)
-            break
-    return text
+    return render_briefing_from_checkpoint_state(state)
 
 
 __all__ = [

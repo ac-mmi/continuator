@@ -7,8 +7,8 @@ from collections.abc import Iterator
 from datetime import datetime, timezone
 from typing import Any
 
+from checkpoint_state_v1 import build_checkpoint_state, render_briefing_from_checkpoint_state
 from continuation_export_v1 import generate_continuation_briefing
-from continuation_export_v2_frontier import generate_continuation_briefing_frontier
 from conversation_explainer_v1 import generate_conversation_explanation
 from handoff_export_v1 import build_platform_exports
 from handoff_generator_v3 import generate_handoff_briefing
@@ -114,13 +114,15 @@ def _finalize_continuator(
         out["chunk_index"] = int(c["chunk_index"])
         v10_outputs.append(out)
 
-    continuation_briefing = generate_continuation_briefing_frontier(
+    checkpoint_state = build_checkpoint_state(
         v10_outputs,
         conversation=text,
         archetype=archetype,
         label=label,
+        project=label,
         total_chunks=len(chunks),
     )
+    continuation_briefing = render_briefing_from_checkpoint_state(checkpoint_state)
     conversation_explanation = generate_conversation_explanation(
         v10_outputs,
         conversation=text,
@@ -142,6 +144,7 @@ def _finalize_continuator(
         "transcript_chars": len(text),
         "chunk_count": len(chunks),
         "chunking": chunk_meta,
+        "checkpoint_state": dict(checkpoint_state),
         "continuation_briefing": continuation_briefing,
         "conversation_explanation": conversation_explanation,
         "briefing_words": briefing_words,
@@ -155,7 +158,61 @@ def _finalize_continuator(
         "metrics": {
             "v10": aggregate_metrics(chunk_results, prefix="v10"),
         },
+        "v10_rows": v10_rows,
+        "_chunks_text": chunks,
     }
+
+
+def run_continuator_incremental(
+    transcript: str,
+    prior_pipeline: dict[str, Any],
+    *,
+    label: str = "",
+    archetype: str = "mixed",
+    use_chunk_ranker: bool = True,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Re-chunk full transcript; reuse cached V10 outputs where chunk hash matches."""
+    from checkpoint_merge_v1 import finalize_session_from_rows, incremental_extract_rows
+    from memory_model_v1 import extract_chunks_at_indices
+
+    text = (transcript or "").strip()
+    chunks, chunk_meta = all_transcript_chunks(text)
+    selected_indices = list(range(len(chunks)))
+    rank_audit: dict[str, Any] = {}
+    if use_chunk_ranker and chunks:
+        from continuator_chunk_ranker_v1 import rank_chunks
+
+        rank_audit = rank_chunks(chunks)
+        selected_indices = list(rank_audit.get("selected_indices") or selected_indices)
+
+    def extract_one(chunk_text: str, index: int, total: int) -> dict[str, Any]:
+        rows = extract_chunks_at_indices(chunks, [index], "v10")
+        return dict(rows[0].get("output") or {}) if rows else {}
+
+    v10_rows, merge_stats = incremental_extract_rows(
+        chunks,
+        selected_indices,
+        prior_pipeline,
+        extract_fn=extract_one,
+    )
+    chunk_selection = {
+        "strategy": rank_audit.get("selection_strategy", "full"),
+        "selected_indices": selected_indices,
+        "k": len(selected_indices),
+        "total_chunks": len(chunks),
+    }
+    session = finalize_session_from_rows(
+        text,
+        chunks,
+        chunk_meta,
+        v10_rows,
+        label=label,
+        archetype=archetype,
+        rank_audit=rank_audit,
+        chunk_selection=chunk_selection,
+    )
+    session["rank_audit"] = rank_audit
+    return session, merge_stats
 
 
 def _stream_line(event_type: str, **payload: Any) -> str:
@@ -257,6 +314,9 @@ def iter_continuator_stream(
         "k": len(selected_indices),
         "total_chunks": total,
     }
+    result["v10_rows"] = v10_rows
+    result["rank_audit"] = rank_audit
+    result["_chunks_text"] = chunks
     yield _stream_line("complete", result=result)
 
 
@@ -297,6 +357,9 @@ def run_continuator(
         "k": len(selected_indices),
         "total_chunks": len(chunks),
     }
+    result["v10_rows"] = v10_rows
+    result["rank_audit"] = rank_audit
+    result["_chunks_text"] = chunks
     return result
 
 

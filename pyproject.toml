@@ -31,6 +31,7 @@ dependencies = [
   "textual>=0.80",
   "huggingface_hub>=0.20",
   "sentence-transformers>=2.2",
+  "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
@@ -48,7 +49,7 @@ Repository = "https://github.com/continuator-ai/continuator"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["continuator*"]
+include = ["continuator*", "continuator_engine*"]
 
 [tool.setuptools.package-data]
 continuator = ["py.typed", "tui/*.tcss"]

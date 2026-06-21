@@ -103,7 +103,19 @@ ProgressBar > .bar--complete {
     padding: 1 0;
 }
 
-/* ── Action footer ─────────────────────────────────────────── */
+Footer {
+    background: #0f1720;
+    color: #64748b;
+}
+
+Footer > .footer--key {
+    color: #22d3ee;
+    text-style: bold;
+}
+
+Footer > .footer--description {
+    color: #94a3b8;
+}
 
 #action-footer {
     dock: bottom;

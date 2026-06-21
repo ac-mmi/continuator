@@ -41,15 +41,24 @@ def memory_brain_root() -> Path:
     return engine_root()
 
 
-def ensure_runtime() -> Path:
-    """Add continuator_engine to sys.path and apply product defaults."""
+def bootstrap_engine_path() -> Path:
+    """Add continuator_engine to sys.path (safe at import time, no engine imports)."""
     root = engine_root()
     root_str = str(root)
     if root_str not in sys.path:
         sys.path.insert(0, root_str)
+    return root
+
+
+def ensure_runtime() -> Path:
+    """Add continuator_engine to sys.path and apply product defaults."""
+    root = bootstrap_engine_path()
 
     os.environ.setdefault("MEMORY_BRAIN_API_MODE", "1")
-    os.environ.setdefault("MEMORY_EXTRACTOR_BACKEND", "mlx")
+    if not os.environ.get("MEMORY_EXTRACTOR_BACKEND", "").strip():
+        from platform_defaults import default_extractor_backend
+
+        os.environ["MEMORY_EXTRACTOR_BACKEND"] = default_extractor_backend()
     os.environ.setdefault("PIPELINE_MODE", "minimal")
     os.environ.setdefault("MEMORY_MODEL", "v10")
     os.environ.setdefault("MEMORY_EXTRACTOR_PROFILE", "fast")

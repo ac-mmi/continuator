@@ -1,0 +1,50 @@
+checkpoint:
+  format_version: 2
+  id: test0001
+  project: neck-refactor
+  label: Neck Refactor
+  message: ""
+  created_at: "2026-06-21T14:30:00+00:00"
+  updated_at: "2026-06-21T14:30:00+00:00"
+  source:
+    kind: file
+    path: examples/neck.txt
+    platform: unknown
+    conversation_id: ""
+    sha256: abc123
+    char_count: 1000
+    message_count: 0
+    transcript_snapshot: "Sample transcript for fixture."
+  engine:
+    baseline: v10-050+repair+continuation_export_v2_frontier+explain_v1
+    memory_model: v10
+    archetype: mixed
+    extractor_backend: mock
+  state:
+    project_title: Neck Refactor
+    objective:
+      - Complete Fetch API module
+    current_state: Implementing fetch wrapper.
+    completed_work:
+      - Completed modules 1-2
+    active_problems:
+      - CORS errors
+    constraints: []
+    next_action: Fix CORS configuration.
+    closure_detected: false
+  cached_exports:
+    briefing: |
+      ## PROJECT
+
+      Neck Refactor
+    explain: Overview of neck refactor.
+    claude: ""
+    chatgpt: ""
+    gemini: ""
+    markdown: ""
+  stats:
+    briefing_words: 5
+    explain_words: 4
+    compression_ratio: 100.0
+    extraction_parse_rate: 1.0
+    runtime_seconds: 0.1

@@ -4,21 +4,10 @@ from __future__ import annotations
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
 from textual.widgets import Label, RichLog, Static
+from rich.align import Align
+from rich.markup import render
 
-
-WELCOME_BODY = """\
-[bold #e0f2fe]AI CONTINUATOR[/]
-
-[#94a3b8]Turn long conversations into AI continuation briefings.[/]
-
-[bold #67e8f9]Capabilities[/]
-[green]✓[/] Continue projects
-[green]✓[/] Resume tutorials
-[green]✓[/] Continue research
-[green]✓[/] Continue journals
-
-[#64748b]Press [/][bold cyan]O[/][#64748b] to open · [/][bold cyan]E[/][#64748b] explain · [/][bold cyan]C[/][#64748b] copy · [/][bold cyan]Q[/][#64748b] quit[/]
-"""
+from continuator.title_art import HERO_ACTIONS, HERO_HINT, HERO_TAGLINE, logo_renderable
 
 
 class WelcomePanel(Vertical):
@@ -29,13 +18,56 @@ class WelcomePanel(Vertical):
         height: 1fr;
         width: 100%;
         align: center middle;
-        padding: 2 4;
         background: #0d1117;
+    }
+
+    #hero-stack {
+        width: 100%;
+        height: auto;
+        align: center middle;
+    }
+
+    #hero-logo {
+        width: 100%;
+        height: auto;
+        color: #67e8f9;
+        text-style: bold;
+        text-align: center;
+        content-align: center middle;
+        margin-bottom: 1;
+    }
+
+    #hero-tagline {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        content-align: center middle;
+    }
+
+    #hero-actions {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        content-align: center middle;
+        margin-top: 1;
+    }
+
+    #hero-hint {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        content-align: center middle;
+        margin-top: 2;
+        color: #475569;
     }
     """
 
     def compose(self) -> ComposeResult:
-        yield Static(WELCOME_BODY, id="welcome-body", markup=True)
+        with Vertical(id="hero-stack"):
+            yield Static(Align.center(logo_renderable()), id="hero-logo")
+            yield Static(Align.center(render(HERO_TAGLINE)), id="hero-tagline")
+            yield Static(Align.center(render(HERO_ACTIONS)), id="hero-actions")
+            yield Static(Align.center(render(HERO_HINT)), id="hero-hint")
 
 
 class ActivityFeed(RichLog):

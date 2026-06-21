@@ -2,7 +2,11 @@
 
 **Turn a long conversation into a continuation briefing for another AI.**
 
-Continuator reads a long ChatGPT, Claude, or tutoring thread and produces a structured handoff briefing — project objective, current position, completed work, active problems, and next action — so you can paste context into a fresh chat and continue naturally.
+Paste a long ChatGPT, Claude, Cursor, or tutoring thread — get a structured handoff (objective, where you left off, completed work, blockers, next action). Paste the briefing into a fresh chat to continue.
+
+Works best on **coding, tutorial, project, and debugging** threads. Not designed for medical Q&A or one-off lookups.
+
+---
 
 ## Screenshots
 
@@ -14,22 +18,24 @@ Continuator reads a long ChatGPT, Claude, or tutoring thread and produces a stru
 
 ![Continuator explain view](docs/images/tui-explain.png)
 
-```bash
-pip install -e .
-continuator continue examples/neck.txt
-```
+---
 
-## Features
+## Requirements
 
-- **Continue** — structured continuation briefing for AI handoff
-- **Explain** — retrospective conversation summary
-- **Export** — platform-ready paste blocks (Claude, ChatGPT, Gemini)
-- **Inspect** — chunking and ranker audit without full extraction
-- **TUI** — interactive terminal UI (default when no subcommand is given)
+| Requirement | Details |
+|-------------|---------|
+| Python | **3.10+** (`python3 --version`) |
+| OS | macOS, Linux, or Windows |
+| Disk | ~2 GB for model weights (first run downloads from Hugging Face) |
+| Git | To clone the repo |
 
-## Install
+---
 
-Requires **Python 3.10+**. Works on **macOS, Windows, and Linux**.
+## Setup (copy-paste)
+
+Clone the repo, create a virtual environment, install Continuator, and pick the **ML backend for your machine**.
+
+### macOS (Apple Silicon — M1/M2/M3/M4)
 
 ```bash
 git clone https://github.com/continuator-ai/continuator.git
@@ -37,92 +43,197 @@ cd continuator
 git checkout release/v0.1
 
 python3 -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -e .
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -e ".[mlx]"
 ```
 
-### Platform-specific extras
+### macOS (Intel) · Linux · Windows
 
-| Platform | Install | Backend (auto) |
-|----------|---------|----------------|
-| **macOS Apple Silicon** | `pip install -e ".[mlx]"` | `mlx` (fast, recommended) |
-| **Windows / Linux / Intel Mac** | `pip install -e ".[transformers]"` | `transformers` |
+Use the **transformers** backend (PyTorch). Linux may need build tools (`build-essential` on Ubuntu/Debian).
 
-Continuator picks the backend automatically. Override with `MEMORY_EXTRACTOR_BACKEND` if needed.
-
-### Model weights
-
-Continuator downloads the V10 LoRA adapter from Hugging Face on first run:
+**macOS / Linux:**
 
 ```bash
-# Optional: pre-download
-hf download ac-mmi/continuator-v10-lora \
-  --local-dir ~/.cache/continuator/models/v10
-export MEMORY_EXTRACTOR_ADAPTER_PATH=~/.cache/continuator/models/v10
+git clone https://github.com/continuator-ai/continuator.git
+cd continuator
+git checkout release/v0.1
+
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -e ".[transformers]"
 ```
 
-Or point to a local adapter directory:
+**Windows (PowerShell):**
 
-```bash
-export MEMORY_EXTRACTOR_ADAPTER_PATH=/path/to/adapter
+```powershell
+git clone https://github.com/continuator-ai/continuator.git
+cd continuator
+git checkout release/v0.1
+
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -e ".[transformers]"
 ```
 
-See [`.env.example`](.env.example) for all configuration options.
+> **Note:** Run all commands from the repo root (the folder that contains `continuator/` and `continuator_engine/`). Do not `cd` into the inner `continuator/` package folder.
 
-### Smoke test (no model)
+---
+
+## Verify install (no model download)
+
+Confirms the CLI and TUI load correctly **without** downloading the LoRA adapter:
+
+**macOS / Linux:**
 
 ```bash
+source .venv/bin/activate
 MEMORY_EXTRACTOR_BACKEND=mock continuator continue examples/neck.txt --quiet
 ```
 
-## Quick start
+**Windows (PowerShell):**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+$env:MEMORY_EXTRACTOR_BACKEND="mock"
+continuator continue examples/neck.txt --quiet
+```
+
+You should see a structured briefing printed. If that works, installation succeeded.
+
+---
+
+## First real run
+
+The first extraction downloads the V10 model from Hugging Face (~1–2 minutes depending on connection).
+
+### Option 1 — Terminal UI (easiest)
 
 ```bash
-# Continuation briefing
-continuator continue examples/neck.txt
-
-# Explain mode
-continuator explain examples/neck.txt
-
-# Export for Claude
-continuator export examples/neck.txt --for claude
-
-# Interactive TUI
 continuator
 ```
 
-## Examples
+Open a sample file from the file picker, or paste a path like `examples/neck.txt`.
 
-Sample conversations live in [`examples/`](examples/):
+### Option 2 — CLI with a file
 
-| File | Description |
-|------|-------------|
-| `neck.txt` | Short posture/health tutoring thread |
-| `gitissue.txt` | GitHub issue discussion |
-| `jquery.txt` | jQuery learning conversation |
+```bash
+continuator continue examples/neck.txt
+```
 
-## Commands
+Other samples in [`examples/`](examples/):
 
-| Command | Description |
-|---------|-------------|
-| `continuator continue FILE` | Generate continuation briefing |
-| `continuator explain FILE` | Generate retrospective summary |
-| `continuator export FILE --for claude` | Platform export |
-| `continuator inspect FILE` | Chunk/ranker audit |
-| `continuator benchmark DIR` | Batch evaluation |
+| File | Good for |
+|------|----------|
+| `neck.txt` | Short tutorial thread (fast first run) |
+| `gitissue.txt` | Coding / GitHub issue |
+| `jquery.txt` | Coding / learning session |
 
-Full CLI reference: [docs/cli-ux-examples.md](docs/cli-ux-examples.md)
+### Option 3 — Paste from clipboard (no save step)
 
-## Environment
+**macOS:**
+
+```bash
+pbpaste | continuator continue -
+```
+
+**Linux** (install `xclip` if needed: `sudo apt install xclip`):
+
+```bash
+xclip -o -selection clipboard | continuator continue -
+```
+
+**Windows (PowerShell):**
+
+```powershell
+Get-Clipboard | continuator continue -
+```
+
+---
+
+## Checkpoint & resume (save state)
+
+Save structured state and resume later **without re-running the model**:
+
+```bash
+# Save checkpoint to .continuator/checkpoint.yaml
+continuator checkpoint examples/gitissue.txt
+
+# Print cached briefing (fast, no model load)
+continuator resume
+```
+
+Incremental update when a conversation grew (append-only):
+
+```bash
+continuator checkpoint my-chat.txt --update
+```
+
+---
+
+## Command cheat sheet
+
+| Command | What it does |
+|---------|----------------|
+| `continuator` | Interactive terminal UI (default) |
+| `continuator continue FILE` | Continuation briefing |
+| `continuator explain FILE` | Retrospective summary |
+| `continuator checkpoint FILE` | Save v2 checkpoint |
+| `continuator resume` | Load cached briefing from checkpoint |
+| `continuator export FILE --for claude` | Paste block for Claude/ChatGPT/Gemini |
+| `continuator inspect FILE` | Chunk/ranker audit (no extraction) |
+| `continuator benchmark DIR` | Batch quality check on a folder |
+
+Use `-` as the file to read from stdin (see clipboard examples above). Add `-q` for minimal output, `-v` for technical details.
+
+Full reference: [docs/cli-ux-examples.md](docs/cli-ux-examples.md)
+
+---
+
+## Model download (optional pre-fetch)
+
+On first real run, weights download automatically to `~/.cache/continuator/models/v10/`.
+
+To download ahead of time:
+
+```bash
+pip install huggingface_hub
+hf download ac-mmi/continuator-v10-lora --local-dir ~/.cache/continuator/models/v10
+```
+
+Windows: use `%USERPROFILE%\.cache\continuator\models\v10` instead of `~/.cache/...`.
+
+---
+
+## Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| `continuator: command not found` | Activate venv: `source .venv/bin/activate` (macOS/Linux) or `.\.venv\Scripts\Activate.ps1` (Windows) |
+| `No module named 'checkpoint_merge_v1'` | Reinstall from repo root: `pip install -e .` (or `pip install -e ".[mlx]"` / `".[transformers]"`) |
+| `continuator_engine not found` | Run `pip install -e .` from the **repo root**, not from inside `continuator/` |
+| MLX error on Apple Silicon | `pip install -e ".[mlx]"` |
+| Torch/transformers error on Windows/Linux | `pip install -e ".[transformers]"` |
+| Hugging Face download fails | Check https://huggingface.co/ac-mmi/continuator-v10-lora is reachable; set `HF_TOKEN` if gated |
+| Slow first run | Normal — downloads embedder + LoRA once |
+| Weak / useless briefing | Thread may be Q&A or medical chat — try `examples/gitissue.txt` instead |
+| Windows script execution blocked | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` then re-activate venv |
+
+More: [docs/installation.md](docs/installation.md) · [`.env.example`](.env.example)
+
+---
+
+## Environment variables (common)
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `MEMORY_EXTRACTOR_BACKEND` | auto: `mlx` (Apple Silicon) or `transformers` (elsewhere) | `mlx`, `transformers`, or `mock` |
-| `MEMORY_MODEL` | `v10` | Extraction schema version |
-| `MEMORY_EXTRACTOR_HF_REPO` | `ac-mmi/continuator-v10-lora` | Hugging Face adapter repo |
-| `MEMORY_EXTRACTOR_ADAPTER_PATH` | — | Local adapter directory (skips download) |
-| `CONTINUATOR_MODEL_CACHE` | `~/.cache/continuator/models` | Download cache |
-| `HF_TOKEN` | — | Hugging Face token for private repos |
+| `MEMORY_EXTRACTOR_BACKEND` | auto (`mlx` or `transformers`) | Set to `mock` for smoke tests |
+| `MEMORY_EXTRACTOR_ADAPTER_PATH` | — | Use a local adapter directory |
+| `HF_TOKEN` | — | Hugging Face token if needed |
+
+---
 
 ## Development
 
@@ -133,17 +244,20 @@ pytest
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+---
+
 ## Architecture
 
 ```
-continuator/           CLI + TUI (this package)
-continuator_engine/    V10 extraction + briefing pipeline
+continuator/           CLI + TUI
+continuator_engine/    V10 extraction pipeline
 examples/              Sample conversations
-tests/                 Unit tests
-docs/                  Documentation
+validation_runs/       Output from validation runner (optional)
 ```
 
-The extraction pipeline uses a fine-tuned LoRA on Qwen2.5-1.5B-Instruct. Weights are fetched from Hugging Face — not bundled in Git.
+Extraction uses a fine-tuned LoRA on Qwen2.5-1.5B-Instruct. Weights are fetched from Hugging Face — not stored in Git.
+
+---
 
 ## License
 

@@ -421,9 +421,9 @@ def _backend() -> str:
         return raw
     if raw:
         return raw
-    import sys
+    from platform_defaults import default_extractor_backend
 
-    return "mlx" if sys.platform == "darwin" else "transformers"
+    return default_extractor_backend()
 
 
 def _adapter_path() -> Path:

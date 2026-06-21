@@ -1,0 +1,1462 @@
+{
+  "summary": {
+    "total": 85,
+    "v10_measured": 6,
+    "by_archetype": {
+      "tutorial": {
+        "count": 28,
+        "avg_usefulness": 4.64,
+        "avg_next_action": 1.68,
+        "avg_active_problems": 2.5,
+        "avg_duplication": 0.184,
+        "high_pct": 50.0,
+        "low_pct": 35.7
+      },
+      "coding": {
+        "count": 33,
+        "avg_usefulness": 4.73,
+        "avg_next_action": 1.73,
+        "avg_active_problems": 2.39,
+        "avg_duplication": 0.166,
+        "high_pct": 39.4,
+        "low_pct": 27.3
+      },
+      "project": {
+        "count": 7,
+        "avg_usefulness": 4.71,
+        "avg_next_action": 2.29,
+        "avg_active_problems": 2.43,
+        "avg_duplication": 0.286,
+        "high_pct": 57.1,
+        "low_pct": 42.9
+      },
+      "journal": {
+        "count": 6,
+        "avg_usefulness": 2.83,
+        "avg_next_action": 1.67,
+        "avg_active_problems": 2.17,
+        "avg_duplication": 0.25,
+        "high_pct": 16.7,
+        "low_pct": 66.7
+      },
+      "medical": {
+        "count": 1,
+        "avg_usefulness": 6.0,
+        "avg_next_action": 2.0,
+        "avg_active_problems": 1.0,
+        "avg_duplication": 0.5,
+        "high_pct": 0.0,
+        "low_pct": 0.0
+      },
+      "other": {
+        "count": 10,
+        "avg_usefulness": 5.8,
+        "avg_next_action": 1.9,
+        "avg_active_problems": 2.6,
+        "avg_duplication": 0.125,
+        "high_pct": 60.0,
+        "low_pct": 10.0
+      }
+    }
+  },
+  "rows": [
+    {
+      "name": "kafka",
+      "archetype": "tutorial",
+      "usefulness_score": 6,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [
+        "weak_action_verb",
+        "duplicates_position"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.0,
+      "next_action": "Show a simple diagram of how data flows in real Kafka systems",
+      "active_problems_count": 1,
+      "completed_work_count": 2,
+      "source": "v10_cache"
+    },
+    {
+      "name": "github",
+      "archetype": "project",
+      "usefulness_score": 3,
+      "usefulness_tier": "low",
+      "next_action_score": 3,
+      "next_action_issues": [
+        "weak_action_verb"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 1.0,
+      "next_action": "Whether to use PRs for validation/testing and pushes/merges for deployments",
+      "active_problems_count": 1,
+      "completed_work_count": 1,
+      "source": "v10_cache"
+    },
+    {
+      "name": "journal",
+      "archetype": "journal",
+      "usefulness_score": 6,
+      "usefulness_tier": "medium",
+      "next_action_score": 4,
+      "next_action_issues": [
+        "question_not_action"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.0,
+      "next_action": "Why am I not fixing my life?",
+      "active_problems_count": 1,
+      "completed_work_count": 0,
+      "source": "v10_cache"
+    },
+    {
+      "name": "pm",
+      "archetype": "project",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 5,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "empty_ok_for_closed_threads"
+      ],
+      "duplication_rate": 0.0,
+      "next_action": "Pick up the open project thread: summarize blockers, propose the next decision, and ask what resource or approval is nee",
+      "active_problems_count": 0,
+      "completed_work_count": 13,
+      "source": "v10_cache"
+    },
+    {
+      "name": "superlong",
+      "archetype": "coding",
+      "usefulness_score": 6,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [
+        "weak_action_verb",
+        "duplicates_position"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.019,
+      "next_action": "Confirm whether InputNode should call onConnect() automatically",
+      "active_problems_count": 4,
+      "completed_work_count": 39,
+      "source": "v10_cache"
+    },
+    {
+      "name": "aman",
+      "archetype": "tutorial",
+      "usefulness_score": 6,
+      "usefulness_tier": "medium",
+      "next_action_score": 3,
+      "next_action_issues": [
+        "weak_action_verb"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.048,
+      "next_action": "Check the console or log the response text to see what is returned",
+      "active_problems_count": 3,
+      "completed_work_count": 14,
+      "source": "v10_cache"
+    },
+    {
+      "name": "my-project",
+      "archetype": "medical",
+      "usefulness_score": 6,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [
+        "question_not_action",
+        "weak_action_verb"
+      ],
+      "active_problems_score": 1,
+      "active_problems_issues": [
+        "observer_framing"
+      ],
+      "duplication_rate": 0.5,
+      "next_action": "If a rash is accompanied by fever, blisters, skin peeling, mouth sores, eye redness, facial swelling, difficulty breathi",
+      "active_problems_count": 1,
+      "completed_work_count": 2,
+      "source": "user_checkpoint"
+    },
+    {
+      "name": "gitissue",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "jquery",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "neck",
+      "archetype": "tutorial",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "how_are_startups_handling_cloud_architecture_and.txt",
+      "archetype": "project",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "how_do_earlystage_b2b_startups_actually_get_their.txt",
+      "archetype": "project",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "how_do_people_create_marketplace_startups.txt",
+      "archetype": "project",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "ive_built_multiple_mvps_for_saas_startups_heres.txt",
+      "archetype": "project",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "monolith_vs_microservices.txt",
+      "archetype": "project",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "companies_still_dont_know_the_difference_between.txt",
+      "archetype": "journal",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "complete_backend_roadmap_with_100_free_learning.txt",
+      "archetype": "journal",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "i_dont_wanna_be_a_software_engineer_anymore_how.txt",
+      "archetype": "journal",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "software_engineers_how_have_you_recovered_from.txt",
+      "archetype": "journal",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "tips_for_thoroughly_preparing_for_a_job_interview.txt",
+      "archetype": "journal",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "can_k8s_redeploy_the_pod_when_container.txt",
+      "archetype": "coding",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "how_do_you_approach_connection_pooling_when.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "just_spent_like_2_days_debugging_over_state.txt",
+      "archetype": "coding",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "several_docker_containers_refuse_to_start_after.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "unable_to_deploy_on_amplify_after_the_update.txt",
+      "archetype": "coding",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_163584.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_183542.txt",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_185407.txt",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_191479.txt",
+      "archetype": "coding",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_193193.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_193565.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_193653.txt",
+      "archetype": "coding",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_195397.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_197149.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_197301.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_197384.txt",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_198547.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_198726.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_198803.txt",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "discussion_198923.txt",
+      "archetype": "coding",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "kubernetes_121454.txt",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "kubernetes_97076.txt",
+      "archetype": "coding",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "react_18499.txt",
+      "archetype": "coding",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "react_35395.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "enhancements_5972.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "fastapi_15236.txt",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "langchain_34169.txt",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "react_rfc_23287.txt",
+      "archetype": "coding",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "supabase_39481.txt",
+      "archetype": "coding",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "vscode_199845.txt",
+      "archetype": "coding",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "database_indexes.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "git.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "javascript_promises.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "kafka.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "react_state.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "machine_learning.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "networking_basics.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "personal_finance.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "spanish_basics.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "tcp_vs_udp.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "career_growth_for_backend_engineers.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "docker.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "kubernetes.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "redis_streams.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "rest_apis.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "linux_processes.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "rag_systems.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "sql_joins.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "system_design.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "vector_databases.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "database_performance.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "docker_networking.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "react_re_render_issues.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "redis_pubsub.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "slow_sql_queries.txt",
+      "archetype": "tutorial",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "ai_career_health.txt",
+      "archetype": "other",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "backend_system_design_investing.txt",
+      "archetype": "other",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "engineering_career_finance.txt",
+      "archetype": "other",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "entrepreneurship_finance_ai.txt",
+      "archetype": "other",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "fitness_productivity_learning.txt",
+      "archetype": "other",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "health_learning_career.txt",
+      "archetype": "other",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "software_engineering_life_planning.txt",
+      "archetype": "other",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "startup_product_engineering.txt",
+      "archetype": "other",
+      "usefulness_score": 1,
+      "usefulness_tier": "low",
+      "next_action_score": 1,
+      "next_action_issues": [
+        "proxy"
+      ],
+      "active_problems_score": 2,
+      "active_problems_issues": [
+        "proxy"
+      ],
+      "duplication_rate": 0.35,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "student_learning_career.txt",
+      "archetype": "other",
+      "usefulness_score": 7,
+      "usefulness_tier": "high",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 3,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    },
+    {
+      "name": "travel_language_finance.txt",
+      "archetype": "other",
+      "usefulness_score": 5,
+      "usefulness_tier": "medium",
+      "next_action_score": 2,
+      "next_action_issues": [],
+      "active_problems_score": 2,
+      "active_problems_issues": [],
+      "duplication_rate": 0.1,
+      "next_action": "(proxy)",
+      "active_problems_count": -1,
+      "completed_work_count": -1,
+      "source": "proxy"
+    }
+  ]
+}

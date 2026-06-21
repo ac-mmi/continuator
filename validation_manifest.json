@@ -1,0 +1,61 @@
+{
+  "sessions": {
+    "neck": {
+      "path": "examples/neck.txt",
+      "category": "tutorials",
+      "priority": 1
+    },
+    "gitissue": {
+      "path": "examples/gitissue.txt",
+      "category": "coding",
+      "priority": 1
+    },
+    "jquery": {
+      "path": "examples/jquery.txt",
+      "category": "coding",
+      "priority": 2
+    },
+    "aman": {
+      "path": "validation_runs/corpus/aman.txt",
+      "category": "tutorials",
+      "priority": 1,
+      "cache_id": "aman"
+    },
+    "kafka": {
+      "path": "validation_runs/corpus/kafka.txt",
+      "category": "tutorials",
+      "priority": 1,
+      "cache_id": "kafka"
+    },
+    "superlong": {
+      "path": "validation_runs/corpus/superlong.txt",
+      "category": "coding",
+      "priority": 2,
+      "cache_id": "superlong"
+    },
+    "pm": {
+      "path": "validation_runs/corpus/pm.txt",
+      "category": "project_planning",
+      "priority": 1,
+      "cache_id": "pm"
+    },
+    "github": {
+      "path": "validation_runs/corpus/github.txt",
+      "category": "debugging",
+      "priority": 2,
+      "cache_id": "github"
+    },
+    "kubernetes": {
+      "path": "validation_runs/corpus/kubernetes.txt",
+      "category": "tutorials",
+      "priority": 3,
+      "cache_id": "kubernetes"
+    },
+    "journal": {
+      "path": "validation_runs/corpus/journal.txt",
+      "category": "research",
+      "priority": 3,
+      "cache_id": "journal"
+    }
+  }
+}

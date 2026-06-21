@@ -3,15 +3,33 @@
 ## Requirements
 
 - Python 3.10 or newer
-- macOS with Apple Silicon for default MLX backend (recommended)
-- Linux/Windows: use `transformers` backend or `mock` for smoke tests
+- macOS, Windows, or Linux
 
 ## Standard install
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate          # macOS/Linux
+# .venv\Scripts\activate           # Windows PowerShell
+
 pip install -e .
+```
+
+## Platform-specific backends
+
+Continuator auto-selects the extraction backend:
+
+| Platform | Default backend | Install extra |
+|----------|-----------------|---------------|
+| macOS Apple Silicon | `mlx` | `pip install -e ".[mlx]"` |
+| Windows | `transformers` | `pip install -e ".[transformers]"` |
+| Linux | `transformers` | `pip install -e ".[transformers]"` |
+| Intel Mac | `transformers` | `pip install -e ".[transformers]"` |
+
+Override anytime:
+
+```bash
+export MEMORY_EXTRACTOR_BACKEND=transformers   # Windows PowerShell: $env:MEMORY_EXTRACTOR_BACKEND="transformers"
 ```
 
 ## With development tools
@@ -20,19 +38,21 @@ pip install -e .
 pip install -e ".[dev]"
 ```
 
-## MLX backend (Apple Silicon)
+## MLX backend (Apple Silicon Mac)
 
 ```bash
 pip install -e ".[mlx]"
-export MEMORY_EXTRACTOR_BACKEND=mlx
 ```
 
-## Transformers backend (cross-platform)
+Backend is set to `mlx` automatically on Apple Silicon.
+
+## Transformers backend (Windows / Linux / Intel Mac)
 
 ```bash
 pip install -e ".[transformers]"
-export MEMORY_EXTRACTOR_BACKEND=transformers
 ```
+
+Backend is set to `transformers` automatically on non-Apple-Silicon platforms.
 
 ## Model weights
 
@@ -55,10 +75,10 @@ export MEMORY_EXTRACTOR_ADAPTER_PATH=~/.cache/continuator/models/v10
 ## Verify
 
 ```bash
-# Structural smoke test (no model)
+# Structural smoke test (no model, all platforms)
 MEMORY_EXTRACTOR_BACKEND=mock continuator continue examples/neck.txt --quiet
 
-# Full pipeline (requires adapter + MLX on macOS)
+# Full pipeline (requires platform extra: [mlx] or [transformers])
 continuator continue examples/neck.txt
 ```
 
@@ -66,9 +86,11 @@ continuator continue examples/neck.txt
 
 | Problem | Fix |
 |---------|-----|
-| `Repository Not Found` on HF download | Model repo not published yet — use `MEMORY_EXTRACTOR_ADAPTER_PATH` or `mock` backend |
-| MLX import error | `pip install -e ".[mlx]"` |
-| `sentence_transformers` download slow | First run downloads MiniLM embedder for chunk ranking — one-time |
-| Empty briefing | Check `--verbose` for extraction errors |
+| `Repository Not Found` on HF download | Check https://huggingface.co/ac-mmi/continuator-v10-lora is public |
+| MLX import error on Mac | `pip install -e ".[mlx]"` (Apple Silicon only) |
+| Transformers/torch error on Windows/Linux | `pip install -e ".[transformers]"` |
+| Wrong backend on Intel Mac | Should auto-use `transformers`; set `MEMORY_EXTRACTOR_BACKEND=transformers` |
+| `sentence_transformers` download slow | First run downloads MiniLM embedder — one-time |
+| Empty briefing | Run with `--verbose` for extraction errors |
 
 See [`.env.example`](../.env.example) for all environment variables.
