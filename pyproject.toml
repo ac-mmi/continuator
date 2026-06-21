@@ -43,9 +43,9 @@ transformers = ["transformers>=4.40", "torch", "peft", "accelerate"]
 continuator = "continuator.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/continuator-ai/continuator"
-Documentation = "https://github.com/continuator-ai/continuator#readme"
-Repository = "https://github.com/continuator-ai/continuator"
+Homepage = "https://github.com/ac-mmi/continuator"
+Documentation = "https://github.com/ac-mmi/continuator#readme"
+Repository = "https://github.com/ac-mmi/continuator"
 
 [tool.setuptools.packages.find]
 where = ["."]

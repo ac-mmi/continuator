@@ -86,6 +86,13 @@ class TuiConsole:
             nums = ", ".join(str(i + 1) for i in selected) or "all"
             self._done(f"Selected frontier chunks: {nums}")
             self._active("Extracting continuation state")
+            try:
+                from adapter_loader import _adapter_ready, cache_root
+
+                if not _adapter_ready(cache_root() / "v10"):
+                    self._status("First run: downloading models from Hugging Face (one-time)…")
+            except Exception:
+                pass
             self._call("post_rank_detail", selected=selected, total=total, strategy=strategy)
             detail = f"Strategy: {strategy} · focus {len(selected)} of {total}"
             self._status(detail)

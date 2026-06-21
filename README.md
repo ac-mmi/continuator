@@ -38,7 +38,7 @@ Clone the repo, create a virtual environment, install Continuator, and pick the 
 ### macOS (Apple Silicon — M1/M2/M3/M4)
 
 ```bash
-git clone https://github.com/continuator-ai/continuator.git
+git clone https://github.com/ac-mmi/continuator.git
 cd continuator
 git checkout release/v0.1
 
@@ -55,7 +55,7 @@ Use the **transformers** backend (PyTorch). Linux may need build tools (`build-e
 **macOS / Linux:**
 
 ```bash
-git clone https://github.com/continuator-ai/continuator.git
+git clone https://github.com/ac-mmi/continuator.git
 cd continuator
 git checkout release/v0.1
 
@@ -68,7 +68,7 @@ pip install -e ".[transformers]"
 **Windows (PowerShell):**
 
 ```powershell
-git clone https://github.com/continuator-ai/continuator.git
+git clone https://github.com/ac-mmi/continuator.git
 cd continuator
 git checkout release/v0.1
 
@@ -107,7 +107,24 @@ You should see a structured briefing printed. If that works, installation succee
 
 ## First real run
 
-The first extraction downloads the V10 model from Hugging Face (~1–2 minutes depending on connection).
+**Important:** Opening the TUI (`continuator`) alone does **not** download anything. Models download when you **open a conversation file and run analysis** (press `O` in the TUI, or use `continuator continue FILE` in the terminal).
+
+The first extraction downloads from Hugging Face (~1–5 minutes depending on connection and platform):
+
+| Component | Source |
+|-----------|--------|
+| V10 LoRA adapter | `ac-mmi/continuator-v10-lora` |
+| Base model | `Qwen/Qwen2.5-1.5B-Instruct` |
+| Chunk ranker embedder | `sentence-transformers/all-MiniLM-L6-v2` |
+
+**Windows:** You must install the transformers extra (`pip install -e ".[transformers]"`). The base `pip install -e .` alone does **not** install PyTorch. If analysis fails silently in the TUI, test in PowerShell first:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+continuator continue examples/neck.txt -v
+```
+
+Use `-v` to see download and extraction errors.
 
 ### Option 1 — Terminal UI (easiest)
 
@@ -209,6 +226,9 @@ Windows: use `%USERPROFILE%\.cache\continuator\models\v10` instead of `~/.cache/
 
 | Problem | Fix |
 |---------|-----|
+| TUI opens but nothing downloads | **Expected** until you press `O` and open a `.txt` file — or run `continuator continue FILE` in the shell |
+| Analysis fails on Windows (no download) | Install transformers backend: `pip install -e ".[transformers]"` — not just `pip install -e .` |
+| Errors hidden in TUI | Re-run with `continuator continue examples/neck.txt -v` in PowerShell to see full output |
 | `continuator: command not found` | Activate venv: `source .venv/bin/activate` (macOS/Linux) or `.\.venv\Scripts\Activate.ps1` (Windows) |
 | `No module named 'checkpoint_merge_v1'` | Reinstall from repo root: `pip install -e .` (or `pip install -e ".[mlx]"` / `".[transformers]"`) |
 | `continuator_engine not found` | Run `pip install -e .` from the **repo root**, not from inside `continuator/` |

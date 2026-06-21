@@ -34,8 +34,9 @@ HERO_ACTIONS = (
     "[#64748b]Export[/]"
 )
 HERO_HINT = (
-    "[#475569]Press [/][bold #22d3ee]O[/][#475569] to open  ·  "
-    "[bold #22d3ee]Q[/][#475569] to quit[/]"
+    "[#475569]Press [/][bold #22d3ee]O[/][#475569] to open a conversation  ·  "
+    "[bold #22d3ee]Q[/][#475569] to quit[/]\n"
+    "[#334155]First analysis downloads models from Hugging Face (one-time, ~2 GB).[/]"
 )
 
 
